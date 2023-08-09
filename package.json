@@ -1,0 +1,16 @@
+{
+  "name": "thumbathon",
+  "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "description": "Resize images to thumbs for fun!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Morgan Atwood",
+  "license": "ISC"
+}
