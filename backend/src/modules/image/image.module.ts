@@ -4,6 +4,7 @@ import { ImageController } from './image.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ImageEventGateway } from './image.event.gateway';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'EVENT_BUS',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://localhost:5672'],
+          urls: ['amqp://127.0.01:5672'],
           queue: 'event_bus',
           queueOptions: {
             durable: true,
@@ -22,7 +23,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
-  providers: [ImageService],
+  providers: [ImageService, ImageEventGateway],
   controllers: [ImageController],
 })
 export class ImageModule {}
+
+//Turn off auto acknowledge?
