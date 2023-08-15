@@ -14,6 +14,6 @@ export class ImageController {
 
   @Post('/resize')
   async resizeImage(@Body() resizeImageDto: ResizeImageDto) {
-    this.imageService.resizeImage(resizeImageDto);
+    return this.imageService.resizeImage(resizeImageDto);
   }
 }

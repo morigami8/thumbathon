@@ -1,13 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ImageService } from './image.service';
-import { ImageController } from './image.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Image } from './entities/image.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ImageEventGateway } from './image.event.gateway';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Image]),
     ClientsModule.register([
       {
         name: 'EVENT_BUS',
@@ -23,9 +19,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
-  providers: [ImageService],
-  controllers: [ImageController],
+  controllers: [ImageEventGateway],
 })
-export class ImageModule {}
-
-//Turn off auto acknowledge?
+export class ImageProcessingModule {}

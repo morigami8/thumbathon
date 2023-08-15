@@ -1,0 +1,1 @@
+export const RESIZE_IMAGE_EVENT = 'RESIZE_IMAGE_EVENT';
