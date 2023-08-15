@@ -7,6 +7,7 @@ import { ResizeImageDto } from './dtos/resizeImage.dto';
 import { ImageFormat, ImageResizeEventDto } from './events/image-resize.event';
 import { v4 as uuidv4 } from 'uuid';
 import { ClientProxy } from '@nestjs/microservices';
+import { RESIZE_IMAGE_EVENT } from '../common/constants';
 
 @Injectable()
 export class ImageService {
@@ -25,7 +26,7 @@ export class ImageService {
   async resizeImage(resizeImageDto: ResizeImageDto) {
     const newImageResizeEvent: ImageResizeEventDto = {
       eventId: uuidv4(),
-      eventType: 'RESIZE_IMAGE_EVENT',
+      eventType: RESIZE_IMAGE_EVENT,
       timestamp: Date.now().toString(),
       data: {
         imageId: '8',
@@ -41,8 +42,10 @@ export class ImageService {
       },
     };
 
-    this.client.emit('RESIZE_IMAGE_EVENT', newImageResizeEvent);
+    await this.client.emit(RESIZE_IMAGE_EVENT, newImageResizeEvent);
 
     this.logger.log('emitted resize image: ', newImageResizeEvent);
+
+    return newImageResizeEvent;
   }
 }

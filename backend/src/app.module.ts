@@ -7,6 +7,7 @@ import { UserModule } from './modules/user/user.module';
 import { ImageModule } from './modules/image/image.module';
 import { Image } from './modules/image/entities/image.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ImageProcessingModule } from './modules/image-processing/image-processing.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     UserModule,
     ImageModule,
+    ImageProcessingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
