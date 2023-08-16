@@ -1,4 +1,4 @@
-import { IsUrl, Max, Min } from 'class-validator';
+import { IsString, IsUrl, Max, Min } from 'class-validator';
 
 export class ResizeImageDto {
   @IsUrl()
@@ -11,4 +11,7 @@ export class ResizeImageDto {
   @Min(150)
   @Max(1000)
   height: number;
+
+  @IsString()
+  fileName: string;
 }

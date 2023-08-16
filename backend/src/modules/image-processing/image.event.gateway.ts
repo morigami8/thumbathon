@@ -5,12 +5,11 @@ import {
 } from '../image/events/image-resize.event';
 import * as sharp from 'sharp';
 import axios from 'axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { Controller, Injectable, Logger } from '@nestjs/common';
 import { RESIZE_IMAGE_EVENT } from '../common/constants';
 import { homedir } from 'os';
-const downloadsDir = `${homedir()}/Downloads/new_image88.jpeg`;
 
-@Injectable()
+@Controller()
 export class ImageEventGateway {
   private readonly logger = new Logger(ImageEventGateway.name);
 
@@ -22,17 +21,18 @@ export class ImageEventGateway {
     const {
       data: {
         originalPath,
+        fileName,
         resizeParameters: { width, height, format, quality, outputPath },
       },
     } = eventData;
 
     const channel = context.getChannelRef();
     const originalMessage = context.getMessage();
+    const downloadsDir = `${homedir()}/Downloads/${fileName}.jpeg`;
 
     this.logger.log('made it to RESIZE_IMAGE_EVENT');
 
     try {
-      this.logger.log('Getting image');
       const response = await axios.get(originalPath, {
         responseType: 'arraybuffer',
       });
@@ -43,10 +43,8 @@ export class ImageEventGateway {
         .resize({ width, height })
         .jpeg({ quality });
 
-      this.logger.log('done processing file');
       await imageProcessing.toFile(downloadsDir);
 
-      this.logger.log('put file in path');
       channel.ack(originalMessage);
     } catch (error) {
       channel.nack(originalMessage);

@@ -49,6 +49,10 @@ class ImageDataDto {
   @IsInt()
   userId: number;
 
+  @IsString()
+  @IsNotEmpty()
+  fileName: string;
+
   @IsObject()
   resizeParameters: ResizeParametersDto;
 }
