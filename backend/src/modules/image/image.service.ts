@@ -32,6 +32,7 @@ export class ImageService {
         imageId: '8',
         originalPath: resizeImageDto.url,
         userId: 25,
+        fileName: resizeImageDto.fileName,
         resizeParameters: {
           width: resizeImageDto.width,
           height: resizeImageDto.height,
