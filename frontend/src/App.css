@@ -1,5 +1,4 @@
 
-
 .container > * {
   display: flex;
   text-align: center;
@@ -15,13 +14,12 @@
   block-size: 500px;
   display: grid;
   grid-template-columns:  1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   grid-template-areas: 
   "header"
   "search"
   "ad"
   "footer"
-  "sidebar";
 }
 @media screen and (max-width:  599px){
   .sidebar {
@@ -64,4 +62,12 @@
 .sidebar {
   grid-area: sidebar;
   background-color: orange;
+}
+
+.search-container-image {
+  background-image: url('https://loremflickr.com/900/400');
+  background-size: cover;
+  background-repeat: no-repeat;
+  block-size: 400px;
+  position: relative;
 }
