@@ -1,5 +1,5 @@
 
-.container > * {
+.container > .search {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -41,7 +41,18 @@
 
 .header {
   grid-area: header;
-  background-color: blue;
+  
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.header-portfolio-logo {
+
 }
 
 .search {
