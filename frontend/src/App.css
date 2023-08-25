@@ -59,7 +59,7 @@
 
 .search {
   grid-area: search;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .footer {
@@ -77,10 +77,10 @@
   background-color: orange;
 }
 
-.search-container-image {
+/* .search-container-image {
   background-image: url('https://loremflickr.com/900/400');
   background-size: cover;
   background-repeat: no-repeat;
   block-size: 400px;
   position: relative;
-}
+} */
