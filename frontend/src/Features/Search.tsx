@@ -12,6 +12,10 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Checkbox,
+  Flex,
+  FormErrorMessage,
+  Stack,
+  Center,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
@@ -20,6 +24,11 @@ const Search = () => {
   const [pixelWidth, setPixelWidth] = useState(250);
   const [sliderPixels, setSliderPixels] = useState(250);
   const [syncLH, setSyncLH] = useState(true);
+  const isInvalid =
+    pixelLength < 50 ||
+    pixelLength > 500 ||
+    pixelWidth < 50 ||
+    pixelWidth > 500;
 
   const handleSliderPixels = (e: any) => {
     setSliderPixels(e);
@@ -32,47 +41,99 @@ const Search = () => {
   };
 
   const handlePixelChange = (e: any) => {
-    setPixelLength(e.target.value);
+    if (e.target.name === 'length') setPixelLength(e.target.value);
+    else setPixelWidth(e.target.value);
   };
 
-  const handleInvalid = (): boolean => {
-    if (pixelLength || pixelWidth > 500) return true;
-    else return false;
-  };
+  const CustomLeftAddon = ({ ...props }) => (
+    <InputLeftAddon
+      borderRadius="8px"
+      bg="blackAlpha.600"
+      color="white"
+      mx={0.5}
+      {...props}
+    />
+  );
+
+  const CustomRightAddon = ({ ...props }) => (
+    <InputRightAddon
+      borderRadius="8px"
+      bg="blackAlpha.600"
+      color="white"
+      mx={0.5}
+      {...props}
+    />
+  );
+
   return (
     <FormControl p={5}>
       <FormLabel>Image Url</FormLabel>
       <InputGroup>
-        <InputLeftAddon children="https://" />
-        <Input placeholder="imageurl" />
-        <InputRightAddon children=".com" />
+        <CustomLeftAddon children="https://" />
+        <Input placeholder="paste image url here" border="1px solid grey" />
       </InputGroup>
-      <Box>
-        <InputGroup>
+      <Box py={5}>
+        <Stack margin={5} direction="column">
           <Checkbox defaultChecked onChange={handleSyncLH}>
-            Sync LH
+            Sync L & H
           </Checkbox>
-          {syncLH && (
-            <>
-              <Input type="number" isDisabled={syncLH} value={sliderPixels} />
-              <Input type="number" isDisabled={syncLH} value={sliderPixels} />
-            </>
+
+          {syncLH ? (
+            <Flex>
+              <InputGroup>
+                <CustomLeftAddon children="Length" />
+                <Input
+                  type="number"
+                  border="1px solid grey"
+                  isDisabled={syncLH}
+                  value={sliderPixels}
+                  mr={2}
+                />
+                <CustomLeftAddon children="Height" />
+                <Input
+                  border="1px solid grey"
+                  type="number"
+                  isDisabled={syncLH}
+                  value={sliderPixels}
+                />
+              </InputGroup>
+            </Flex>
+          ) : (
+            <Flex>
+              <FormControl mr="0.6rem" isInvalid={isInvalid}>
+                <InputGroup>
+                  <InputLeftAddon children="Length" />
+                  <Input
+                    name="length"
+                    type="number"
+                    value={pixelLength}
+                    onChange={handlePixelChange}
+                    isInvalid={pixelLength < 50 || pixelLength > 500}
+                  />
+                </InputGroup>
+              </FormControl>
+
+              <FormControl isInvalid={isInvalid}>
+                <InputGroup>
+                  <InputLeftAddon children="Height" />
+                  <Input
+                    name="height"
+                    type="number"
+                    value={pixelWidth}
+                    onChange={handlePixelChange}
+                    isInvalid={pixelWidth < 50 || pixelWidth > 500}
+                  />
+                </InputGroup>
+              </FormControl>
+
+              {isInvalid && (
+                <FormErrorMessage>
+                  set pixels between 50 and 500
+                </FormErrorMessage>
+              )}
+            </Flex>
           )}
-          {!syncLH && (
-            <>
-              <Input
-                type="number"
-                value={pixelLength}
-                onChange={handlePixelChange}
-              />
-              <Input
-                type="number"
-                value={pixelWidth}
-                onChange={handlePixelChange}
-              />
-            </>
-          )}
-        </InputGroup>
+        </Stack>
       </Box>
       <Slider
         defaultValue={250}
@@ -82,19 +143,23 @@ const Search = () => {
         onChange={(e) => handleSliderPixels(e)}
         isDisabled={!syncLH}
       >
-        <SliderTrack bg="grey">
+        <SliderTrack>
           <Box position="relative" right={10} />
           <SliderFilledTrack
             bg={
               syncLH
-                ? 'rgb(34,193,195); background: linear-gradient(90deg,rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);'
+                ? 'rgb(34,193,195); background: linear-gradient(90deg,rgba(253,187,45,1) 0%, rgba(205,188,78,1) 50%, rgba(34,193,195,1) 100%);'
                 : 'grey'
             }
           />
         </SliderTrack>
         <SliderThumb boxSize={6} />
       </Slider>
-      <Button>Generate!</Button>
+      <Center py={5}>
+        <Button bg="#22c1c3" color="white">
+          Generate!
+        </Button>
+      </Center>
     </FormControl>
   );
 };

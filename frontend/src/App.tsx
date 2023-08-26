@@ -11,7 +11,6 @@ function App() {
         <Header />
         <Content />
         <Search />
-        <div className="footer">footer</div>
       </div>
     </div>
   );
