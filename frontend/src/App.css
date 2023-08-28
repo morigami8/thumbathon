@@ -77,10 +77,7 @@
   background-color: orange;
 }
 
-/* .search-container-image {
-  background-image: url('https://loremflickr.com/900/400');
-  background-size: cover;
-  background-repeat: no-repeat;
-  block-size: 400px;
-  position: relative;
-} */
+.fade {
+  transition: opacity 1s;
+  opacity: 0;
+}

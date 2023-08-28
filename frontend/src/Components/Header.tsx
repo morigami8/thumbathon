@@ -1,5 +1,11 @@
 import { Box, Center, HStack, Icon } from '@chakra-ui/react';
-import { FaGithub, FaHome, FaLinkedin } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaHome,
+  FaLinkedin,
+  FaRegThumbsUp,
+  FaThumbtack,
+} from 'react-icons/fa';
 import React from 'react';
 
 const Header = () => {
@@ -8,7 +14,10 @@ const Header = () => {
       <div className="header-container">
         <div className="header-socials-container">
           <div className="header-portfolio-logo">
-            <a href="">Thumnbathon</a>
+            <a href="">
+              {' '}
+              <Icon as={FaRegThumbsUp} /> THUMBATHON
+            </a>
           </div>
           <HStack gap="12px" spacing="12px" className="header-socials">
             <a href="">
