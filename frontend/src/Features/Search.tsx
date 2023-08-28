@@ -16,14 +16,19 @@ import {
   FormErrorMessage,
   Stack,
   Center,
+  FormHelperText,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Search = () => {
   const [pixelLength, setPixelLength] = useState(0);
-  const [pixelWidth, setPixelWidth] = useState(250);
-  const [sliderPixels, setSliderPixels] = useState(250);
+  const [pixelWidth, setPixelWidth] = useState(275);
+  const [sliderPixels, setSliderPixels] = useState(275);
   const [syncLH, setSyncLH] = useState(true);
+  const [explainerText, setExplainerText] = useState(
+    'Use the slider to change the pixels'
+  );
+  const [isVisible, setIsVisible] = useState(true);
   const isInvalid =
     pixelLength < 50 ||
     pixelLength > 500 ||
@@ -38,6 +43,16 @@ const Search = () => {
     setSyncLH(e.target.checked);
     setPixelLength(sliderPixels);
     setPixelWidth(sliderPixels);
+    setIsVisible(false); // Start the fade-out
+
+    setTimeout(() => {
+      if (e.target.checked) {
+        setExplainerText('Use the slider to change the pixels');
+      } else {
+        setExplainerText('Type in your desired pixels');
+      }
+      setIsVisible(true); // Start the fade-in
+    }, 300);
   };
 
   const handlePixelChange = (e: any) => {
@@ -69,14 +84,16 @@ const Search = () => {
     <FormControl p={5}>
       <FormLabel>Image Url</FormLabel>
       <InputGroup>
-        <CustomLeftAddon children="https://" />
+        <CustomLeftAddon bg="#22c1c3" children="https://" />
         <Input placeholder="paste image url here" border="1px solid grey" />
       </InputGroup>
       <Box py={5}>
-        <Stack margin={5} direction="column">
-          <Checkbox defaultChecked onChange={handleSyncLH}>
-            Sync L & H
-          </Checkbox>
+        <Stack my={5} direction="column">
+          <Box>
+            <Checkbox colorScheme="cyan" defaultChecked onChange={handleSyncLH}>
+              Sync L & H
+            </Checkbox>
+          </Box>
 
           {syncLH ? (
             <Flex>
@@ -102,7 +119,7 @@ const Search = () => {
             <Flex>
               <FormControl mr="0.6rem" isInvalid={isInvalid}>
                 <InputGroup>
-                  <InputLeftAddon children="Length" />
+                  <CustomLeftAddon bg="#22c1c3" children="Length" />
                   <Input
                     name="length"
                     type="number"
@@ -115,7 +132,7 @@ const Search = () => {
 
               <FormControl isInvalid={isInvalid}>
                 <InputGroup>
-                  <InputLeftAddon children="Height" />
+                  <CustomLeftAddon bg="#22c1c3" children="Height" />
                   <Input
                     name="height"
                     type="number"
@@ -125,15 +142,22 @@ const Search = () => {
                   />
                 </InputGroup>
               </FormControl>
-
-              {isInvalid && (
-                <FormErrorMessage>
-                  set pixels between 50 and 500
-                </FormErrorMessage>
-              )}
             </Flex>
           )}
         </Stack>
+        <Center>
+          {isInvalid ? (
+            <FormErrorMessage>set pixels between 50 and 500</FormErrorMessage>
+          ) : (
+            <FormHelperText
+              opacity={isVisible ? 1 : 0}
+              transition="opacity 0.3s ease"
+              id="explainerText"
+            >
+              {explainerText}
+            </FormHelperText>
+          )}
+        </Center>
       </Box>
       <Slider
         defaultValue={250}
@@ -165,3 +189,5 @@ const Search = () => {
 };
 
 export default Search;
+
+//TODO: NO ERROR MESSAGE WHEN PIXELS ARE OUT OF RANGE

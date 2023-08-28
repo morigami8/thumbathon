@@ -5,7 +5,10 @@ import {
   Box,
   Heading,
   Center,
+  ListIcon,
+  List,
 } from '@chakra-ui/react';
+import { FaAsterisk, FaCheckCircle } from 'react-icons/fa';
 
 const Content = () => {
   return (
@@ -33,11 +36,40 @@ const Content = () => {
         >
           Create Thumbnails Easily
         </Heading>
-        <UnorderedList p={{ base: '1em' }} mx="auto" spacing={5}>
-          <ListItem>Paste your image url in the textbox</ListItem>
-          <ListItem>Set your desired pixels</ListItem>
-          <ListItem>Click Generate!</ListItem>
-        </UnorderedList>
+        <List
+          fontSize={{ base: 'small', sm: 'lg', md: 'x-large' }}
+          p={{ base: '1em' }}
+          mx="auto"
+          spacing={5}
+        >
+          <ListItem>
+            <ListIcon
+              verticalAlign="middle"
+              fontSize={12}
+              as={FaAsterisk}
+              color="#white"
+            />
+            Paste your image url in the textbox
+          </ListItem>
+          <ListItem>
+            <ListIcon
+              verticalAlign="middle"
+              fontSize={12}
+              as={FaAsterisk}
+              color="#white"
+            />
+            Set your desired pixels
+          </ListItem>
+          <ListItem>
+            <ListIcon
+              verticalAlign="middle"
+              fontSize={12}
+              as={FaAsterisk}
+              color="#white"
+            />
+            Click Generate!
+          </ListItem>
+        </List>
       </Box>
     </Container>
   );
