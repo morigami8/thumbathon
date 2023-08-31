@@ -25,8 +25,7 @@ const Content = () => {
         <Heading
           fontSize={{
             sm: '1.5rem',
-            md: '1.5rem',
-            lg: '1.875rem',
+            lg: '1.7rem',
           }}
           mx="auto"
           py="auto"

@@ -96,6 +96,4 @@ const Search = () => {
 
 export default Search;
 
-//TODO: NO ERROR MESSAGE WHEN PIXELS ARE OUT OF RANGE
-//TODO: Explainer text doesnt show up
 //TODO: Connect NestJS and React
