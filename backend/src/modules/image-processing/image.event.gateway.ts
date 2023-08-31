@@ -52,3 +52,6 @@ export class ImageEventGateway {
     }
   }
 }
+
+//TODO: check for valid outputpath url
+//RabbitMQ goes into infinite loop
