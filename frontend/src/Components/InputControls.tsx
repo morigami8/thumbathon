@@ -5,7 +5,7 @@ import { CustomLeftAddon } from './common/CustomLeftAddon';
 type InputControlProps = {
   syncLH: boolean;
   handlePixelChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  pixelLength: number;
+  pixelHeight: number;
   pixelWidth: number;
   sliderPixels: number;
   isInvalid: boolean;
@@ -14,7 +14,7 @@ type InputControlProps = {
 const InputControls = ({
   syncLH,
   handlePixelChange,
-  pixelLength,
+  pixelHeight,
   pixelWidth,
   sliderPixels,
   isInvalid,
@@ -49,9 +49,9 @@ const InputControls = ({
               <Input
                 name="length"
                 type="number"
-                value={pixelLength}
+                value={pixelHeight}
                 onChange={handlePixelChange}
-                isInvalid={pixelLength < 50 || pixelLength > 500}
+                isInvalid={pixelHeight < 50 || pixelHeight > 500}
               />
             </InputGroup>
           </FormControl>

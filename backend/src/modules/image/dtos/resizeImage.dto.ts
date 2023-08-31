@@ -2,7 +2,7 @@ import { IsString, IsUrl, Max, Min } from 'class-validator';
 
 export class ResizeImageDto {
   @IsUrl()
-  url: string;
+  imageUrl: string;
 
   @Min(150)
   @Max(1000)

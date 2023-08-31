@@ -1,11 +1,7 @@
 import {
   FormControl,
   Button,
-  Slider,
-  SliderTrack,
   Box,
-  SliderFilledTrack,
-  SliderThumb,
   Checkbox,
   Stack,
   Center,
@@ -15,19 +11,22 @@ import ImageUrl from '../Components/ImageUrl';
 import InputControls from '../Components/InputControls';
 import FormMessages from '../Components/FormMessages';
 import PixelSlider from '../Components/PixelSlider';
+import axios from 'axios';
+import { BASE_URL } from '../constants';
 
 const Search = () => {
-  const [pixelLength, setPixelLength] = useState(275);
+  const [pixelHeight, setpixelHeight] = useState(275);
   const [pixelWidth, setPixelWidth] = useState(275);
   const [sliderPixels, setSliderPixels] = useState(275);
   const [syncLH, setSyncLH] = useState(true);
+  const [imageUrl, setImageUrl] = useState('');
   const [explainerText, setExplainerText] = useState(
     'Use the slider to change the pixels'
   );
   const [isVisible, setIsVisible] = useState(true);
   const isInvalid =
-    pixelLength < 50 ||
-    pixelLength > 500 ||
+    pixelHeight < 50 ||
+    pixelHeight > 500 ||
     pixelWidth < 50 ||
     pixelWidth > 500;
 
@@ -37,7 +36,7 @@ const Search = () => {
 
   const handleSyncLH = (e: any) => {
     setSyncLH(e.target.checked);
-    setPixelLength(sliderPixels);
+    setpixelHeight(sliderPixels);
     setPixelWidth(sliderPixels);
     setIsVisible(false); // Start the fade-out
 
@@ -51,46 +50,83 @@ const Search = () => {
     }, 300);
   };
 
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        BASE_URL,
+        {
+          imageUrl: imageUrl,
+          width: pixelWidth,
+          height: pixelHeight,
+          fileName: 'from_react_image',
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log(response.data);
+    } catch (e: any) {
+      console.log(e);
+    }
+
+    setImageUrl('');
+  };
+
+  const handleImageUrl = (e: any) => {
+    setImageUrl(e.target.value);
+  };
+
   const handlePixelChange = (e: any) => {
-    if (e.target.name === 'length') setPixelLength(e.target.value);
+    if (e.target.name === 'length') setpixelHeight(e.target.value);
     else setPixelWidth(e.target.value);
   };
 
   return (
-    <FormControl p={5}>
-      <ImageUrl />
+    <form onSubmit={handleSubmit}>
+      <FormControl p={5}>
+        <ImageUrl handleImageUrl={handleImageUrl} imageUrl={imageUrl} />
 
-      <Box py={5}>
-        <Stack my={5} direction="column">
-          <Box>
-            <Checkbox colorScheme="cyan" defaultChecked onChange={handleSyncLH}>
-              Sync L & H
-            </Checkbox>
-          </Box>
-          <InputControls
-            syncLH={syncLH}
-            handlePixelChange={handlePixelChange}
-            pixelLength={pixelLength}
-            pixelWidth={pixelWidth}
-            sliderPixels={sliderPixels}
-            isInvalid={isInvalid}
-          />
-        </Stack>
-        <FormControl isInvalid={isInvalid}>
-          <FormMessages
-            isInvalid={isInvalid}
-            isVisible={isVisible}
-            explainerText={explainerText}
-          />
-        </FormControl>
-      </Box>
-      <PixelSlider syncLH={syncLH} handleSliderPixels={handleSliderPixels} />
-      <Center py={5}>
-        <Button bg="#22c1c3" color="white">
-          Generate!
-        </Button>
-      </Center>
-    </FormControl>
+        <Box py={5}>
+          <Stack my={5} direction="column">
+            <Box>
+              <Checkbox
+                colorScheme="cyan"
+                defaultChecked
+                onChange={handleSyncLH}
+              >
+                Sync L & H
+              </Checkbox>
+            </Box>
+            <InputControls
+              syncLH={syncLH}
+              handlePixelChange={handlePixelChange}
+              pixelHeight={pixelHeight}
+              pixelWidth={pixelWidth}
+              sliderPixels={sliderPixels}
+              isInvalid={isInvalid}
+            />
+          </Stack>
+          <FormControl isInvalid={isInvalid}>
+            <FormMessages
+              isInvalid={isInvalid}
+              isVisible={isVisible}
+              explainerText={explainerText}
+            />
+          </FormControl>
+        </Box>
+        <PixelSlider syncLH={syncLH} handleSliderPixels={handleSliderPixels} />
+        <Center py={5}>
+          <Button type="submit" bg="#22c1c3" color="white">
+            Generate!
+          </Button>
+        </Center>
+      </FormControl>
+    </form>
   );
 };
 
