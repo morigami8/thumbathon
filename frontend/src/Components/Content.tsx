@@ -1,20 +1,17 @@
 import {
   Container,
   ListItem,
-  UnorderedList,
   Box,
   Heading,
-  Center,
   ListIcon,
   List,
 } from '@chakra-ui/react';
-import { FaAsterisk, FaCheckCircle } from 'react-icons/fa';
+import { FaAsterisk } from 'react-icons/fa';
 
 const Content = () => {
   return (
     <Container
       className="main-content"
-      bg="purple.300"
       color="white"
       background="rgb(34,193,195); background: linear-gradient(90deg,rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);"
       borderRadius={40}

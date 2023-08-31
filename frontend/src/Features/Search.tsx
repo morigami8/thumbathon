@@ -17,7 +17,7 @@ import FormMessages from '../Components/FormMessages';
 import PixelSlider from '../Components/PixelSlider';
 
 const Search = () => {
-  const [pixelLength, setPixelLength] = useState(0);
+  const [pixelLength, setPixelLength] = useState(275);
   const [pixelWidth, setPixelWidth] = useState(275);
   const [sliderPixels, setSliderPixels] = useState(275);
   const [syncLH, setSyncLH] = useState(true);
@@ -76,11 +76,13 @@ const Search = () => {
             isInvalid={isInvalid}
           />
         </Stack>
-        <FormMessages
-          isInvalid={isInvalid}
-          isVisible={isVisible}
-          explainerText={explainerText}
-        />
+        <FormControl isInvalid={isInvalid}>
+          <FormMessages
+            isInvalid={isInvalid}
+            isVisible={isVisible}
+            explainerText={explainerText}
+          />
+        </FormControl>
       </Box>
       <PixelSlider syncLH={syncLH} handleSliderPixels={handleSliderPixels} />
       <Center py={5}>
