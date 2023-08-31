@@ -3,6 +3,7 @@ import './App.css';
 import Search from './Features/Search';
 import Header from './Components/Header';
 import Content from './Components/Content';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Header />
         <Content />
         <Search />
+        <Footer />
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { Center, FormErrorMessage, FormHelperText } from '@chakra-ui/react';
-import React from 'react';
 
 type FormMessageProps = {
   isInvalid: boolean;
@@ -14,7 +13,7 @@ const FormMessages = ({
   return (
     <Center>
       {isInvalid ? (
-        <FormErrorMessage>set pixels between 50 and 500</FormErrorMessage>
+        <FormErrorMessage>set pixels between 50 or 500</FormErrorMessage>
       ) : (
         <FormHelperText
           opacity={isVisible ? 1 : 0}
