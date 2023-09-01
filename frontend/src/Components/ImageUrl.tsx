@@ -1,16 +1,14 @@
-import { FormLabel, Input, InputGroup } from '@chakra-ui/react';
-import React from 'react';
+import { Input, InputGroup } from '@chakra-ui/react';
 import { CustomLeftAddon } from './common/CustomLeftAddon';
 
 const ImageUrl = ({ imageUrl, handleImageUrl }: any) => {
   return (
     <>
-      <FormLabel>Image Url</FormLabel>
       <InputGroup>
-        <CustomLeftAddon bg="#22c1c3" children="https://" />
+        <CustomLeftAddon bg="#22c1c3" children="Image Url" />
         <Input
           onChange={handleImageUrl}
-          placeholder="paste image url here"
+          placeholder="https://loremflickr.com/320/240"
           border="1px solid grey"
           value={imageUrl}
         />
