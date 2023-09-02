@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { HStack, Icon } from '@chakra-ui/react';
 import { FaGithub, FaHome, FaLinkedin, FaRegThumbsUp } from 'react-icons/fa';
 
@@ -8,7 +9,7 @@ const Header = () => {
         <div className="header-socials-container">
           <div className="header-portfolio-logo">
             <a href="">
-              {' '}
+              {''}
               <Icon as={FaRegThumbsUp} /> THUMBATHON
             </a>
           </div>
