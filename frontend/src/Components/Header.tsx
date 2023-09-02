@@ -1,12 +1,5 @@
-import { Box, Center, HStack, Icon } from '@chakra-ui/react';
-import {
-  FaGithub,
-  FaHome,
-  FaLinkedin,
-  FaRegThumbsUp,
-  FaThumbtack,
-} from 'react-icons/fa';
-import React from 'react';
+import { HStack, Icon } from '@chakra-ui/react';
+import { FaGithub, FaHome, FaLinkedin, FaRegThumbsUp } from 'react-icons/fa';
 
 const Header = () => {
   return (
