@@ -5,7 +5,6 @@ import {
   SliderThumb,
   SliderTrack,
 } from '@chakra-ui/react';
-import React from 'react';
 
 type PixelSliderProps = {
   syncLH: boolean;
