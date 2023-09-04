@@ -131,5 +131,3 @@ const Search = () => {
 };
 
 export default Search;
-
-//TODO: Connect NestJS and React
