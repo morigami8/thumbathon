@@ -5,6 +5,8 @@ import {
   Checkbox,
   Stack,
   Center,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import ImageUrl from '../Components/ImageUrl';
@@ -23,6 +25,7 @@ const Search = () => {
   const [explainerText, setExplainerText] = useState(
     'Use the slider to change the pixels'
   );
+  const [imageSubmitSucess, setImageSubmitSucess] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const isInvalid =
     pixelHeight < 50 ||
@@ -69,12 +72,15 @@ const Search = () => {
         }
       );
 
+      setImageSubmitSucess(true);
       console.log(response.data);
     } catch (e: any) {
       console.log(e);
     }
-
     setImageUrl('');
+    setTimeout(() => {
+      setImageSubmitSucess(false);
+    }, 5000);
   };
 
   const handleImageUrl = (e: any) => {
@@ -87,8 +93,8 @@ const Search = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl p={5}>
+    <form className="form" onSubmit={handleSubmit}>
+      <FormControl p={5} mb={5}>
         <ImageUrl handleImageUrl={handleImageUrl} imageUrl={imageUrl} />
 
         <Box py={5}>
@@ -125,6 +131,20 @@ const Search = () => {
             Generate!
           </Button>
         </Center>
+        {imageSubmitSucess && (
+          <Center>
+            <Alert
+              justifyContent="center"
+              width="80%"
+              m={5}
+              colorScheme="yellow"
+              variant="top-accent"
+            >
+              <AlertIcon />
+              Image successfully processed! Check your "Downloads" Folder
+            </Alert>
+          </Center>
+        )}
       </FormControl>
     </form>
   );
