@@ -51,5 +51,4 @@ export class ImageEventGateway {
 }
 
 //TODO: check for valid outputpath url
-//Chat GPT fucked it -- I think it has to do with the Main.ts file, try agian.
 //RabbitMQ goes into infinite loop
