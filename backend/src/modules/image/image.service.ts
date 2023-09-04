@@ -30,7 +30,7 @@ export class ImageService {
       timestamp: Date.now().toString(),
       data: {
         imageId: '8',
-        originalPath: resizeImageDto.url,
+        originalPath: resizeImageDto.imageUrl,
         userId: 25,
         fileName: resizeImageDto.fileName,
         resizeParameters: {
