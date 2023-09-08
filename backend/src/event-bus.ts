@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import { RABBITMQ_URL } from './constants';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
@@ -8,7 +9,7 @@ async function bootstrap() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://127.0.0.1:5672'],
+        urls: [RABBITMQ_URL],
         queue: 'event_bus',
         noAck: false,
         queueOptions: {
