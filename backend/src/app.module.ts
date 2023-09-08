@@ -15,6 +15,7 @@ import { ImageProcessingModule } from './modules/image-processing/image-processi
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
+          envFilePath: './../.env',
         }),
       ],
       useFactory: (configService: ConfigService) => ({
