@@ -5,8 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from '../../user/entities/user.entity';
 import { DateTimes } from '../../common/entities/dateTimes.entity';
+import { Users } from '../../user/entities/users.entity';
 
 @Entity()
 export class Image {
@@ -19,10 +19,10 @@ export class Image {
   @Column(() => DateTimes)
   date: DateTimes;
 
-  @ManyToOne(() => User, (user) => user.images)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+  @ManyToOne(() => Users, (Users) => Users.images)
+  @JoinColumn({ name: 'Users_id' })
+  Users: Users;
 
   @Column()
-  user_id: number;
+  Users_id: number;
 }

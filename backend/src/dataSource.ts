@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
-import { User } from './modules/user/entities/user.entity';
 import { Image } from './modules/image/entities/image.entity';
+import { Users } from './modules/user/entities/users.entity';
 export default new DataSource({
   type: 'postgres',
   host: 'localhost',
@@ -8,7 +8,7 @@ export default new DataSource({
   username: 'mjatwood',
   password: 'postgres',
   database: 'postgres',
-  entities: [User, Image],
+  entities: [Users, Image],
   synchronize: false,
   migrations: ['./src/migrations/*.ts'],
 });
