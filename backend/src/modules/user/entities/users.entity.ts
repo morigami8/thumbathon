@@ -3,7 +3,7 @@ import { Image } from '../../image/entities/image.entity';
 import { DateTimes } from '../../common/entities/dateTimes.entity';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -16,6 +16,6 @@ export class User {
   @Column(() => DateTimes)
   date: DateTimes;
 
-  @OneToMany(() => Image, (image) => image.user)
+  @OneToMany(() => Image, (image) => image.Users)
   images: Image[];
 }

@@ -1,26 +1,55 @@
 version: '3'
 
 services:
-  thumbathon:
+  backend:
     image: mjatwood/thumbathon-backend:latest
+    command: /bin/sh -c "npm run typeorm:run"
+    ports:
+      - "3001:3001"
     environment:
       - DATABASE_HOST=postgres
       - DATABASE_USERNAME=${DATABASE_USERNAME}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - RABBITMQ_URL=amqp://rabbitmq:5672
     env_file:
       - .env
     depends_on:
       - postgres
+      - rabbitmq
+    networks:
+      - thumbathon-net
+  
+  frontend:
+    image: mjatwood/thumbathon-frontend:latest
+    ports:
+      - "3000:80"
+    networks:
+      - thumbathon-net
 
   postgres:
-    image: postgres:latest
+    image: postgres:15
     environment:
       - "POSTGRES_USER=${DATABASE_USERNAME}"
       - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
       - "POSTGRES_DB=${DATABASE_NAME}"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - thumbathon-net
+  
+  rabbitmq:
+    image: "rabbitmq"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - thumbathon-net
       
 volumes:
   pgdata:
+
+networks:
+  thumbathon-net:
+    driver: bridge

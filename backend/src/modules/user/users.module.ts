@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
+import { UsersService } from './users.service';
+import { UsersController } from './users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { Users } from './entities/users.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Users]),
     ClientsModule.register([
       {
         name: 'EVENT_BUS',
@@ -22,7 +22,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
-  providers: [UserService],
-  controllers: [UserController],
+  providers: [UsersService],
+  controllers: [UsersController],
 })
-export class UserModule {}
+export class UsersModule {}
