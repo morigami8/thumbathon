@@ -4,7 +4,9 @@ import { config } from 'dotenv';
 import { Image } from './src/modules/image/entities/image.entity';
 import { Users } from './src/modules/user/entities/users.entity';
 
-config();
+config({
+  path: '../.env',
+});
 
 const configService = new ConfigService();
 
