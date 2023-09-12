@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ImageEventGateway } from './image.event.gateway';
 import { RABBITMQ_URL } from '../../constants';
+import { ImageProcessingService } from './image-processing.service';
 
 @Module({
   imports: [
@@ -21,5 +22,6 @@ import { RABBITMQ_URL } from '../../constants';
     ]),
   ],
   controllers: [ImageEventGateway],
+  providers: [ImageProcessingService],
 })
 export class ImageProcessingModule {}
