@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ImageProcessingModule } from './modules/image-processing/image-processing.module';
 import { Users } from './modules/user/entities/users.entity';
 import { UsersModule } from './modules/user/users.module';
+import { FileDownloaderModule } from './modules/file-downloader/file-downloader.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { UsersModule } from './modules/user/users.module';
     UsersModule,
     ImageModule,
     ImageProcessingModule,
+    FileDownloaderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
