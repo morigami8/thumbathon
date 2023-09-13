@@ -4,7 +4,6 @@ import { ImageController } from './image.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from './entities/image.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { RABBITMQ_URL } from '../../constants';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import { RABBITMQ_URL } from '../../constants';
         name: 'EVENT_BUS',
         transport: Transport.RMQ,
         options: {
-          urls: [RABBITMQ_URL],
+          urls: [process.env.RABBITMQ_URL],
           queue: 'event_bus',
           //noAck: false,
           queueOptions: {
