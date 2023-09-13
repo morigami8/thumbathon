@@ -63,7 +63,7 @@ const Search = () => {
           imageUrl: imageUrl,
           width: pixelWidth,
           height: pixelHeight,
-          fileName: 'from_react_image',
+          fileName: 'thumbathon_image',
         },
         {
           headers: {
