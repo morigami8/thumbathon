@@ -11,6 +11,9 @@ function App() {
         <Header />
         <Content />
         <Search />
+        <a href="http://localhost:3001/file/download" download>
+          Download
+        </a>
         <Footer />
       </div>
     </div>
