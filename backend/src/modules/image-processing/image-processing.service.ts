@@ -13,7 +13,7 @@ export class ImageProcessingService {
     height: number,
     quality: number,
   ): Promise<string> {
-    const downloadsDir = `/tmp/${fileName}.jpeg`;
+    const downloadsDir = `/tmp/downloads/${fileName}.jpeg`;
 
     this.logger.log('Resizing Image...');
     this.logger.log('Download Directory:', downloadsDir);

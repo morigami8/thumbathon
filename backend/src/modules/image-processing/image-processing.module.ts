@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ImageEventGateway } from './image.event.gateway';
-import { RABBITMQ_URL } from '../../constants';
 import { ImageProcessingService } from './image-processing.service';
 
 @Module({
@@ -11,7 +10,7 @@ import { ImageProcessingService } from './image-processing.service';
         name: 'EVENT_BUS',
         transport: Transport.RMQ,
         options: {
-          urls: [RABBITMQ_URL],
+          urls: [process.env.RABBITMQ_URL],
           queue: 'event_bus',
           //noAck: false,
           queueOptions: {
