@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as sharp from 'sharp';
+import * as fs from 'fs';
+import * as path from 'path';
 import axios from 'axios';
 
 @Injectable()
@@ -13,10 +15,16 @@ export class ImageProcessingService {
     height: number,
     quality: number,
   ): Promise<string> {
-    const downloadsDir = `/tmp/downloads/${fileName}.jpeg`;
+    const downloadsDir = '/tmp/downloads';
+
+    if (!fs.existsSync(downloadsDir)) {
+      fs.mkdirSync(downloadsDir, { recursive: true });
+    }
+
+    const fileDestination = path.join(downloadsDir, `${fileName}.jpeg`);
 
     this.logger.log('Resizing Image...');
-    this.logger.log('Download Directory:', downloadsDir);
+    this.logger.log('Download Directory:', fileDestination);
 
     try {
       const response = await axios.get(originalPath, {
@@ -29,9 +37,9 @@ export class ImageProcessingService {
         .resize({ width, height })
         .jpeg({ quality });
 
-      await imageProcessing.toFile(downloadsDir);
+      await imageProcessing.toFile(fileDestination);
 
-      return downloadsDir;
+      return fileDestination;
     } catch (error) {
       this.logger.error('Error resizing image:', error);
       throw new Error('Error resizing image');

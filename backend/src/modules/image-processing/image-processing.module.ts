@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ImageEventGateway } from './image.event.gateway';
 import { ImageProcessingService } from './image-processing.service';
+import { RABBITMQ_URL } from '../../constants';
 
 @Module({
   imports: [
