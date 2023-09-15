@@ -7,6 +7,10 @@ import {
   Center,
   Alert,
   AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  Container,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import ImageUrl from '../Components/ImageUrl';
@@ -78,9 +82,6 @@ const Search = () => {
       console.log(e);
     }
     setImageUrl('');
-    setTimeout(() => {
-      setImageSubmitSucess(false);
-    }, 5000);
   };
 
   const handleImageUrl = (e: any) => {
@@ -92,11 +93,14 @@ const Search = () => {
     else setPixelWidth(e.target.value);
   };
 
+  const handleDownloadButton = () => {
+    setImageSubmitSucess(false);
+  };
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <FormControl p={5} mb={5}>
         <ImageUrl handleImageUrl={handleImageUrl} imageUrl={imageUrl} />
-
         <Box py={5}>
           <Stack my={5} direction="column">
             <Box>
@@ -133,16 +137,36 @@ const Search = () => {
         </Center>
         {imageSubmitSucess && (
           <Center>
-            <Alert
-              justifyContent="center"
-              width="80%"
-              m={5}
-              colorScheme="yellow"
-              variant="top-accent"
-            >
-              <AlertIcon />
-              Image successfully processed! Check your "Downloads" Folder
-            </Alert>
+            <Container>
+              <Alert m={5} status="success" variant="subtle" bg="whitesmoke">
+                <Box
+                  ml={{ md: '2em' }}
+                  display="flex"
+                  alignItems="center"
+                  textAlign="center"
+                >
+                  <AlertIcon color="#22c1c3" />
+                  <AlertTitle m={2}>Image succesfully processed!</AlertTitle>
+                  <AlertDescription m={2}>
+                    <Button
+                      onClick={handleDownloadButton}
+                      bg="#22c1c3"
+                      color="white"
+                    >
+                      <a href="http://localhost:3001/file/download" download>
+                        Download Image
+                      </a>
+                    </Button>
+                  </AlertDescription>
+                </Box>
+                <CloseButton
+                  alignSelf="flex-start"
+                  position="relative"
+                  onClick={handleDownloadButton}
+                  ml={{ md: '2em' }}
+                />
+              </Alert>
+            </Container>
           </Center>
         )}
       </FormControl>
