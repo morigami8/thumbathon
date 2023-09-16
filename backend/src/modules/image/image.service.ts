@@ -8,6 +8,7 @@ import { ImageFormat, ImageResizeEventDto } from './events/image-resize.event';
 import { v4 as uuidv4 } from 'uuid';
 import { ClientProxy } from '@nestjs/microservices';
 import { RESIZE_IMAGE_EVENT } from '../common/constants';
+import { RABBITMQ_URL } from '../../constants';
 
 @Injectable()
 export class ImageService {
@@ -42,6 +43,8 @@ export class ImageService {
         },
       },
     };
+
+    console.log('rabbitmq from image service: ', process.env.RABBITMQ_URL);
 
     await this.client.emit(RESIZE_IMAGE_EVENT, newImageResizeEvent);
 

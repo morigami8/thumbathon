@@ -27,7 +27,7 @@ const Search = () => {
   const [syncLH, setSyncLH] = useState(true);
   const [imageUrl, setImageUrl] = useState('');
   const [explainerText, setExplainerText] = useState(
-    'Use the slider to change the pixels'
+    'Use the slider to change pixel dimensions'
   );
   const [imageSubmitSucess, setImageSubmitSucess] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -131,14 +131,26 @@ const Search = () => {
         </Box>
         <PixelSlider syncLH={syncLH} handleSliderPixels={handleSliderPixels} />
         <Center py={5}>
-          <Button type="submit" bg="#22c1c3" color="white">
+          <Button
+            isDisabled={imageUrl.length < 5}
+            _hover={{ background: '#44a2a4' }}
+            type="submit"
+            bg="#22c1c3"
+            color="white"
+          >
             Generate!
           </Button>
         </Center>
         {imageSubmitSucess && (
           <Center>
             <Container>
-              <Alert m={5} status="success" variant="subtle" bg="whitesmoke">
+              <Alert
+                borderTop="4px solid #44a2a4"
+                m={5}
+                status="success"
+                variant="subtle"
+                bg="whitesmoke"
+              >
                 <Box
                   ml={{ md: '2em' }}
                   display="flex"
@@ -149,7 +161,7 @@ const Search = () => {
                   <AlertTitle m={2}>Image succesfully processed!</AlertTitle>
                   <AlertDescription m={2}>
                     <Button
-                      onClick={handleDownloadButton}
+                      _hover={{ background: '#44a2a4' }}
                       bg="#22c1c3"
                       color="white"
                     >

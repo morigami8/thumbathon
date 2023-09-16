@@ -8,7 +8,7 @@ const ImageUrl = ({ imageUrl, handleImageUrl }: any) => {
         <CustomLeftAddon bg="#22c1c3" children="Image Url" />
         <Input
           onChange={handleImageUrl}
-          placeholder="https://loremflickr.com/320/240"
+          placeholder="https://your-image-here.com"
           border="1px solid grey"
           value={imageUrl}
         />

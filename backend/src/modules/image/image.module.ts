@@ -14,7 +14,7 @@ import { RABBITMQ_URL } from '../../constants';
         name: 'EVENT_BUS',
         transport: Transport.RMQ,
         options: {
-          urls: [process.env.RABBITMQ_URL],
+          urls: [RABBITMQ_URL],
           queue: 'event_bus',
           //noAck: false,
           queueOptions: {

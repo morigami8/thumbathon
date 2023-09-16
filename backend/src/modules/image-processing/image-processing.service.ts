@@ -35,9 +35,15 @@ export class ImageProcessingService {
 
       const imageProcessing = await sharp(imageBuffer)
         .resize({ width, height })
-        .jpeg({ quality });
+        .jpeg({ quality })
+        .toBuffer();
 
-      await imageProcessing.toFile(fileDestination);
+      //await imageProcessing.toFile(fileDestination);
+      fs.writeFileSync(fileDestination, imageProcessing);
+
+      if (fs.existsSync(fileDestination))
+        this.logger.log(`File sucessfully written to : ${fileDestination}`);
+      else this.logger.log(`File failed to write to : ${fileDestination}`);
 
       return fileDestination;
     } catch (error) {
