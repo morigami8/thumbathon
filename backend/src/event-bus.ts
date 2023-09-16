@@ -23,6 +23,8 @@ async function bootstrap() {
       },
     },
   );
+
+  console.log('From event bus path: ', process.env.RABBITMQ_URL);
   app.listen();
 }
 
