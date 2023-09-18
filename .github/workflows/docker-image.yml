@@ -17,8 +17,8 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Build backend image
-      run: docker build -f ./backend/Dockerfile -t mjatwood/thumbathon-backend:$(date +%s) ./backend
+      run: docker build -f ./backend/Dockerfile -t mjatwood/thumbathon-backend:latest .
 
     - name: Build frontend image
-      run: docker build -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:$(date +%s) ./frontend
+      run: docker build -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:latest .
 
