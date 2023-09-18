@@ -20,5 +20,5 @@ jobs:
       run: docker build -f ./backend/Dockerfile -t mjatwood/thumbathon-backend:latest ./backend
 
     - name: Build frontend image
-      run: docker build -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:latest ./backend
+      run: docker build -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:latest ./frontend
 
