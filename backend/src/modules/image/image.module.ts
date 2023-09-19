@@ -16,7 +16,6 @@ import { RABBITMQ_URL } from '../../constants';
         options: {
           urls: [RABBITMQ_URL],
           queue: 'event_bus',
-          //noAck: false,
           queueOptions: {
             durable: true,
           },
@@ -28,5 +27,3 @@ import { RABBITMQ_URL } from '../../constants';
   controllers: [ImageController],
 })
 export class ImageModule {}
-
-//Turn off auto acknowledge?

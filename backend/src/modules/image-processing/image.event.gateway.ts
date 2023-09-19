@@ -1,6 +1,6 @@
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { ImageResizeEventDto } from '../image/events/image-resize.event';
-import { Controller, Logger, Inject } from '@nestjs/common';
+import { Controller, Logger } from '@nestjs/common';
 import { RESIZE_IMAGE_EVENT } from '../common/constants';
 import { ImageProcessingService } from './image-processing.service';
 
@@ -42,6 +42,3 @@ export class ImageEventGateway {
     }
   }
 }
-
-//TODO: check for valid outputpath url
-//RabbitMQ goes into infinite loop

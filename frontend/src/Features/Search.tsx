@@ -77,9 +77,8 @@ const Search = () => {
       );
 
       setImageSubmitSucess(true);
-      console.log(response.data);
     } catch (e: any) {
-      console.log(e);
+      throw e;
     }
     setImageUrl('');
   };

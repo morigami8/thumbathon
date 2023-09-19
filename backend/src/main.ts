@@ -7,8 +7,6 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../../.env') });
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  console.log(process.env.DATABASE_USERNAME);
-
   const PORT = process.env.PORT || 3001;
   const FRONTEND_ORIGIN =
     process.env.FRONTEND_ORIGIN || 'http://localhost:3000';

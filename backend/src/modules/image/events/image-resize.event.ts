@@ -14,7 +14,6 @@ import {
 export enum ImageFormat {
   JPEG = 'jpeg',
   PNG = 'png',
-  // ... other formats as per Sharp's capabilities
 }
 
 export class ResizeParametersDto {
