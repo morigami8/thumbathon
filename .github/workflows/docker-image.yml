@@ -30,12 +30,12 @@ jobs:
 
     - name: Build backend image
       run: |
-        docker build -f ./backend/Dockerfile -t mjatwood/thumbathon-backend:latest ./backend
+        docker buildx build --platform linux/amd64,linux/arm64 -f ./backend/Dockerfile -t mjatwood/thumbathon-backend:latest ./backend
         docker push mjatwood/thumbathon-backend:latest
 
     - name: Build frontend image
       run: |
-        docker build -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:latest ./frontend
+        docker buildx build --platform linux/amd64,linux/arm64 -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:latest ./frontend
         docker push mjatwood/thumbathon-frontend:latest
 
 
