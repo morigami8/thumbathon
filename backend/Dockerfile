@@ -1,4 +1,7 @@
-FROM node:16
+FROM node:18
+
+# Update npm to the latest version
+RUN npm install -g npm@latest
 
 WORKDIR /src/app
 
