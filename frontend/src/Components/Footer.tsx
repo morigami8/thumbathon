@@ -11,6 +11,7 @@ const Footer = () => {
       borderRadius={20}
       my={5}
       flexDirection="column"
+      alignItems="center"
     >
       <Box fontSize="1.5em" filter="drop-shadow(0 0 3px #000)">
         <Text>Tech Stack</Text>
