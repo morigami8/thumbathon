@@ -8,9 +8,19 @@ on:
     branches:
       - main
 
+env:
+  BACKEND_IMAGE: mjatwood/thumbathon-backend:latest
+  FRONTEND_IMAGE: mjatwood/thumbathon-frontend:latest
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
 
     steps:
     - name: Checkout code
@@ -41,17 +51,33 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    # Set up BuildKit Docker container builder
+    # Set up BuildKit Docker container builder and QEMU for emulation
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226
-      with:
-        use-cache: true
-        cache-path: /tmp/.buildx-cache
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
 
     # Build and push backend image
     - name: Build backend image
-      run: docker buildx build --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache --platform linux/amd64,linux/arm64 -f ./backend/Dockerfile -t mjatwood/thumbathon-backend:latest ./backend --push
+      run: |
+        docker buildx build \
+        --cache-from=type=local,src=/tmp/.buildx-cache \
+        --cache-to=type=local,dest=/tmp/.buildx-cache \
+        --platform ${{ matrix.platform }} \
+        -f ./backend/Dockerfile \
+        -t ${{ env.BACKEND_IMAGE }} \
+        ./backend \
+        --push
 
     # Build and push frontend image
     - name: Build frontend image
-      run: docker buildx build --cache-from=type=local,src=/tmp/.buildx-cache --cache-to=type=local,dest=/tmp/.buildx-cache --platform linux/amd64,linux/arm64 -f ./frontend/Dockerfile -t mjatwood/thumbathon-frontend:latest ./frontend --push
+      run: |
+        docker buildx build \
+        --cache-from=type=local,src=/tmp/.buildx-cache \
+        --cache-to=type=local,dest=/tmp/.buildx-cache \
+        --platform ${{ matrix.platform }} \
+        -f ./frontend/Dockerfile \
+        -t ${{ env.FRONTEND_IMAGE }} \
+        ./frontend \
+        --push
