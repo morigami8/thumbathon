@@ -20,7 +20,7 @@ jobs:
       matrix:
         platform:
           - linux/amd64
-          - linux/arm64v8
+          - linux/arm64v7
 
     steps:
     - name: Checkout code
