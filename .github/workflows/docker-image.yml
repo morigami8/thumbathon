@@ -62,8 +62,6 @@ jobs:
     - name: Build backend image
       run: |
         docker buildx build \
-        --cache-from=type=local,src=/tmp/.buildx-cache \
-        --cache-to=type=local,dest=/tmp/.buildx-cache \
         --platform ${{ matrix.platform }} \
         -f ./backend/Dockerfile \
         -t ${{ env.BACKEND_IMAGE }} \
