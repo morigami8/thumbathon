@@ -1,8 +1,5 @@
 FROM node:18
 
-# Update npm to the latest version
-RUN npm install -g npm@latest
-
 WORKDIR /src/app
 
 COPY package*.json ./
