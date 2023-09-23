@@ -1,4 +1,4 @@
-FROM node:20-alpine3.17
+FROM node:18-alpine3.18
 
 WORKDIR /src/app
 
@@ -7,7 +7,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
 
 EXPOSE 3001
 
