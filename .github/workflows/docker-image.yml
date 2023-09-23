@@ -15,11 +15,34 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Cache node_modules
+    - name: Cache node modules
+      uses: actions/cache@v3.3.2
+      with:
+        path: backend/node_modules
+        key: node-modules-${{ runner.os }}-${{ hashFiles('backend/package-lock.json') }}
+        restore-keys: |
+          node-modules-${{ runner.os }}-
+      
+    # Cache Docker layers
+    - name: Cache Docker layers
+      uses: actions/cache@v3.3.2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
     # Login to Docker Hub
     - name: Docker Login
       uses: docker/login-action@v3.0.0
@@ -27,17 +50,34 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    # Set up Docker Buildx and QEMU
-    - name: Setup Docker Buildx
+    # Set up BuildKit Docker container builder and QEMU for emulation
+    - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
       
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
       with:
-        platforms: 'arm64,arm'
+        platforms: 'arm64'
 
-    # Build and push both backend and frontend images
-    - name: Build and push images
+    # Build and push backend image
+    - name: Build backend image
       run: |
-        docker buildx build --push --platform linux/amd64,linux/arm64 -f ./backend/Dockerfile -t ${{ env.BACKEND_IMAGE }} ./backend
-        docker buildx build --push --platform linux/amd64,linux/arm64 -f ./frontend/Dockerfile -t ${{ env.FRONTEND_IMAGE }} ./frontend
+        docker buildx build \
+        --cache-from=type=local,src=/tmp/.buildx-cache \
+        --cache-to=type=local,dest=/tmp/.buildx-cache \
+        --platform ${{ matrix.platform }} \
+        -f ./backend/Dockerfile \
+        -t ${{ env.BACKEND_IMAGE }} \
+        ./backend \
+        --push
+    # Build and push frontend image
+    - name: Build frontend image
+      run: |
+        docker buildx build \
+        --cache-from=type=local,src=/tmp/.buildx-cache \
+        --cache-to=type=local,dest=/tmp/.buildx-cache \
+        --platform ${{ matrix.platform }} \
+        -f ./frontend/Dockerfile \
+        -t ${{ env.FRONTEND_IMAGE }} \
+        ./frontend \
+        --push
