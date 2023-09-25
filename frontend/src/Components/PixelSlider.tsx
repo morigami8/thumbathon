@@ -26,7 +26,7 @@ const PixelSlider = ({ syncLH, handleSliderPixels }: PixelSliderProps) => {
         <SliderFilledTrack
           bg={
             syncLH
-              ? 'rgb(34,193,195); background: linear-gradient(90deg,rgba(253,187,45,1) 0%, rgba(205,188,78,1) 50%, rgba(34,193,195,1) 100%);'
+              ? 'rgb(34,193,195); background: linear-gradient(90deg,rgba(247,203,108,1) 0%, rgba(205,188,78,1) 50%, rgba(110,204,205,1) 100%);'
               : 'grey'
           }
         />

@@ -3,7 +3,7 @@ import { Box, Flex, HStack, Text } from '@chakra-ui/react';
 const Footer = () => {
   return (
     <Flex
-      bg="rgb(34,193,195); background: linear-gradient(90deg,rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);"
+      bg="rgb(34,193,195); background: linear-gradient(90deg,rgba(247,203,108,1) 0%, rgba(110,204,205,1) 100%);"
       color="white"
       className="footer"
       width="100%"
@@ -18,7 +18,7 @@ const Footer = () => {
       </Box>
       <HStack
         fontSize={{ sm: '16px', md: '18px', lg: '20px' }}
-        filter="drop-shadow(0 0 3px #000)"
+        filter="drop-shadow(1px 1px 3px #000)"
         gap={4}
       >
         <a href="https://nestjs.com">NestJS</a>

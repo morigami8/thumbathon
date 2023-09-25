@@ -1,4 +1,8 @@
 
+body {
+  background: linear-gradient(to right, #ebf3f2, #c7e0df);
+}
+
 .container > .search {
   display: flex;
   text-align: center;

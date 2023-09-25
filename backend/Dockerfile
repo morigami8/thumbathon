@@ -1,4 +1,8 @@
-FROM node:18
+FROM node:20
+
+# Update npm to the latest version
+RUN npm install -g npm@10.1.0
+
 
 WORKDIR /src/app
 
@@ -7,6 +11,7 @@ RUN npm install
 
 COPY . .
 
+RUN npm run build
 
 EXPOSE 3001
 

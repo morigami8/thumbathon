@@ -13,13 +13,14 @@ const Content = () => {
     <Container
       className="main-content"
       color="white"
-      background="rgb(34,193,195); background: linear-gradient(90deg,rgba(253,187,45,1) 0%, rgba(34,193,195,1) 100%);"
+      background="rgb(34,193,195); background: linear-gradient(90deg,rgba(247,203,108,1) 0%, rgba(110,204,205,1) 100%);"
       borderRadius={40}
     >
       <Box
         display="flex"
         flexDirection="column"
         filter="drop-shadow(0 0 3px #000)"
+        //textShadow="black 0 0 5px"
         py="5"
       >
         <Heading

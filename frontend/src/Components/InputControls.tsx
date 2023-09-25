@@ -27,14 +27,14 @@ const InputControls = ({
             <CustomLeftAddon children="Length" />
             <Input
               type="number"
-              border="1px solid grey"
+              border="2px solid grey"
               isDisabled={syncLH}
               value={sliderPixels}
               mr={2}
             />
             <CustomLeftAddon children="Height" />
             <Input
-              border="1px solid grey"
+              border="2px solid grey"
               type="number"
               isDisabled={syncLH}
               value={sliderPixels}
@@ -45,10 +45,11 @@ const InputControls = ({
         <Flex>
           <FormControl mr="0.6rem" isInvalid={isInvalid}>
             <InputGroup>
-              <CustomLeftAddon bg="#22c1c3" children="Length" />
+              <CustomLeftAddon bg="rgba(110,204,205,1)" children="Length" />
               <Input
                 name="length"
                 type="number"
+                border="2px solid grey"
                 value={pixelHeight}
                 onChange={handlePixelChange}
                 isInvalid={pixelHeight < 50 || pixelHeight > 500}
@@ -58,10 +59,11 @@ const InputControls = ({
 
           <FormControl isInvalid={isInvalid}>
             <InputGroup>
-              <CustomLeftAddon bg="#22c1c3" children="Height" />
+              <CustomLeftAddon bg="rgba(110,204,205,1)" children="Height" />
               <Input
                 name="height"
                 type="number"
+                border="2px solid grey"
                 value={pixelWidth}
                 onChange={handlePixelChange}
                 isInvalid={pixelWidth < 50 || pixelWidth > 500}

@@ -5,11 +5,11 @@ const ImageUrl = ({ imageUrl, handleImageUrl }: any) => {
   return (
     <>
       <InputGroup>
-        <CustomLeftAddon bg="#22c1c3" children="Image Url" />
+        <CustomLeftAddon bg="rgba(110, 204, 205, 1)" children="Image Url" />
         <Input
           onChange={handleImageUrl}
           placeholder="https://your-image-here.com"
-          border="1px solid grey"
+          border="2px solid grey"
           value={imageUrl}
         />
       </InputGroup>
