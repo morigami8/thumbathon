@@ -24,31 +24,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Node/Cache 
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - run: npm ci
-      
 
-    # Cache node_modules
-    - name: Cache node modules
-      uses: actions/cache@v3.3.2
-      with:
-        path: backend/node_modules
-        key: node-modules-${{ runner.os }}-${{ hashFiles('backend/package-lock.json') }}
-        restore-keys: |
-          node-modules-${{ runner.os }}-
-      
-    # Cache Docker layers
-    - name: Cache Docker layers
-      uses: actions/cache@v3.3.2
-      with:
-        path: /tmp/.buildx-cache
-        key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
     # Login to Docker Hub
     - name: Docker Login
       uses: docker/login-action@v3.0.0
@@ -62,15 +38,11 @@ jobs:
       
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
-      with:
-        platforms: 'arm64'
 
     # Build and push backend image
     - name: Build backend image
       run: |
         docker buildx build \
-        --cache-from=type=local,src=/tmp/.buildx-cache \
-        --cache-to=type=local,dest=/tmp/.buildx-cache \
         --platform ${{ matrix.platform }} \
         -f ./backend/Dockerfile \
         -t ${{ env.BACKEND_IMAGE }} \
@@ -80,8 +52,6 @@ jobs:
     - name: Build frontend image
       run: |
         docker buildx build \
-        --cache-from=type=local,src=/tmp/.buildx-cache \
-        --cache-to=type=local,dest=/tmp/.buildx-cache \
         --platform ${{ matrix.platform }} \
         -f ./frontend/Dockerfile \
         -t ${{ env.FRONTEND_IMAGE }} \
