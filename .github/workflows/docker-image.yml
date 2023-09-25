@@ -1,0 +1,59 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  BACKEND_IMAGE: mjatwood/thumbathon-backend:latest
+  FRONTEND_IMAGE: mjatwood/thumbathon-frontend:latest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Login to Docker Hub
+    - name: Docker Login
+      uses: docker/login-action@v3.0.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    # Set up BuildKit Docker container builder and QEMU for emulation
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    # Build and push backend image
+    - name: Build backend image
+      run: |
+        docker buildx build \
+        --platform ${{ matrix.platform }} \
+        -f ./backend/Dockerfile \
+        -t ${{ env.BACKEND_IMAGE }} \
+        ./backend \
+        --push
+    # Build and push frontend image
+    - name: Build frontend image
+      run: |
+        docker buildx build \
+        --platform ${{ matrix.platform }} \
+        -f ./frontend/Dockerfile \
+        -t ${{ env.FRONTEND_IMAGE }} \
+        ./frontend \
+        --push
