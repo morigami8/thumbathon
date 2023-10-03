@@ -61,8 +61,9 @@ const Search = () => {
     e.preventDefault();
 
     try {
+      const baseUrl = process.env.REACT_APP_BASE_URL || BASE_URL;
       const response = await axios.post(
-        BASE_URL,
+        baseUrl,
         {
           imageUrl: imageUrl,
           width: pixelWidth,
