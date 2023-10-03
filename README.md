@@ -30,7 +30,20 @@ Thumbathon is a full-stack application designed to resize images in an efficient
    ```sh
    npm install
    ```
-3. **Environment Variables**: Set up your `.env` files in both the frontend and backend directories based on the `.env.example` files.
+3. Environment Variables: Set up your .env files in the backend directory based on the following example. Remember to replace placeholder values with your actual secrets and credentials for local development and likewise for production or other environments.
+
+🔐 Example .env File
+```sh
+DATABASE_HOST=your_database_host
+DATABASE_PORT=your_database_port
+DATABASE_USERNAME=your_database_username
+DATABASE_PASSWORD=your_database_password
+DATABASE_NAME=your_database_name
+
+RABBITMQ_URL=your_rabbitmq_url
+```
+
+
 4. **Start Services**
    ```sh
    docker-compose up
