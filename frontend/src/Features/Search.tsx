@@ -77,7 +77,7 @@ const Search = () => {
           withCredentials: true,
         }
       );
-
+      console.log(baseUrl);
       setImageSubmitSucess(true);
     } catch (e: any) {
       throw e;
