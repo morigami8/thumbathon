@@ -166,7 +166,10 @@ const Search = () => {
                       bg="#22c1c3"
                       color="white"
                     >
-                      <a href="http://localhost:3001/file/download" download>
+                      <a
+                        href={`${process.env.REACT_APP_DOWNLOAD_URL}/file/download`}
+                        download
+                      >
                         Download Image
                       </a>
                     </Button>
