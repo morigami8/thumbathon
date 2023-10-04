@@ -11,6 +11,7 @@ async function bootstrap() {
   const FRONTEND_ORIGIN =
     process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
 
+  console.log(FRONTEND_ORIGIN);
   app.enableCors({
     origin: FRONTEND_ORIGIN,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

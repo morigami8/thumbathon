@@ -74,9 +74,10 @@ const Search = () => {
           headers: {
             'Content-Type': 'application/json',
           },
+          withCredentials: true,
         }
       );
-
+      console.log(baseUrl);
       setImageSubmitSucess(true);
     } catch (e: any) {
       throw e;
