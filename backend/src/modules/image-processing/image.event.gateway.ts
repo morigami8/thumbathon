@@ -35,10 +35,12 @@ export class ImageEventGateway {
         quality,
       );
       this.logger.log(`Image saved at: ${filePath}`);
+      console.log(`Image saved at: ${filePath}`);
       channel.ack(originalMessage);
     } catch (error) {
       channel.nack(originalMessage);
       this.logger.error('Error processing the image resize event:', error);
+      console.log('Error processing the image resize event:', error);
     }
   }
 }
