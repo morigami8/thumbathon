@@ -8,6 +8,7 @@ import * as path from 'path';
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 async function bootstrap() {
+  console.log('RabbitMQ URL: ', RABBITMQ_URL); // Log the URL to debug
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
@@ -23,7 +24,8 @@ async function bootstrap() {
     },
   );
 
-  app.listen();
+  await app.listen();
+  console.log('Microservice is listening'); // Log when service is listening
 }
 
 bootstrap();
